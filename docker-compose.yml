@@ -10,3 +10,4 @@ community:
     networks:
       - msa-network
     build: ./CommunityService
+
