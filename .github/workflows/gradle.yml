@@ -49,7 +49,7 @@
             host: ${{ secrets.HOST }}
             key: ${{ secrets.PRIVATE_KEY }}
             port: ${{ secrets.PORT }}
-            source: "./docker-compose.yml"
+            source: "./docker-compose-community.yml"
             target: "/home/ec2-user/"
             
       - name: Deploy
@@ -61,4 +61,4 @@
           script: |
             docker pull ${{ secrets.DOCKER_USERNAME }}/community:latest
             docker image prune -a -f
-     
+            docker-compose -f docker-compose-community.yml up -d
