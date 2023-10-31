@@ -1,4 +1,16 @@
-community:
+version: '3'
+services:
+  apigateway:
+    image: gwangjang/apigateway
+    networks:
+      - msa-network
+
+  eureka:
+    image: gwangjang/eureka:latest
+    networks:
+      - msa-network
+
+  community:
     image: gwangjang/community
     depends_on:
       - eureka
@@ -11,3 +23,5 @@ community:
       - msa-network
     build: ./CommunityService
 
+networks:
+  msa-network:
