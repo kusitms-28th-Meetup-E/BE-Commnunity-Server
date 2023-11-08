@@ -1,9 +1,11 @@
 package gwangjang.server.global.entity;
 
 import jakarta.persistence.MappedSuperclass;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+@Getter
 @MappedSuperclass
 public class BaseEntity {
 
