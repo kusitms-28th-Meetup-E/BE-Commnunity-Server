@@ -1,7 +1,7 @@
 package gwangjang.server.domain.adapter.in.message.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import gwangjang.server.domain.application.feign.dto.MemberDto;
+import gwangjang.server.domain.application.dto.res.MemberDto;
 import lombok.RequiredArgsConstructor;
 import org.apache.kafka.common.header.Headers;
 import org.apache.kafka.common.serialization.Deserializer;

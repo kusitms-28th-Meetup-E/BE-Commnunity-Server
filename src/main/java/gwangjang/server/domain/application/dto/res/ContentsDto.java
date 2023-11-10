@@ -1,4 +1,4 @@
-package gwangjang.server.domain.application.feign.dto;
+package gwangjang.server.domain.application.dto.res;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,6 +10,10 @@ import lombok.NoArgsConstructor;
 public class ContentsDto {
 
     private Long contentsId;
-    private String contents;;
+    private String contents;
+
+    private String keyword;
+    private String issue;
+    private String domain;
 
 }

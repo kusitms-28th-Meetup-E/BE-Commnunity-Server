@@ -21,7 +21,7 @@ public class Community extends BaseEntity {
     private String title;
     private String talk;
 
-    private Long writerId;
+    private String writerId;
 
     private Long contentsId; //keyword,issue,domain 불러오기 위함
     private String contents; // 인용하기 위함

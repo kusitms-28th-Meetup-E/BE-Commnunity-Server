@@ -29,7 +29,9 @@ public class CommunityRepositoryImpl implements CommunityCustomRepository {
                         .select(Projections.constructor(CommunityRes.class,
                                 community.id,
                                 community.title,
+                                community.talk,
                                 community.createdAt,
+                                community.writerId,
                                 community.domain,
                                 community.issue,
                                 community.keyword

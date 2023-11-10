@@ -24,8 +24,7 @@ public class CommunityController {
     private final CommunityReadUseCase communityReadUseCase;
 
 
-    @PostMapping("/{contentsId}")
-
+    @PostMapping("contents/{contentsId}")
     public ResponseEntity<SuccessResponse<CommunityRes>> createCommunity(@RequestHeader(value = "user-id") String socialId, @PathVariable("contentsId") Long contentsId, @RequestBody CommunityReq communityReq) {
         return ResponseEntity.ok(SuccessResponse.create(CREATE_COMMUNITY_SUCCESS.getMessage(), this.communityCreateUseCase.createCommunity(socialId, contentsId, communityReq)));
     }
