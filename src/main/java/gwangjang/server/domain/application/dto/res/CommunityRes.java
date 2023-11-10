@@ -11,6 +11,7 @@ public class CommunityRes {
 
     private Long id;
     private String title;
+    private String talk;
     private String createdAt;
 
     private String nickname;
