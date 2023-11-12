@@ -9,6 +9,7 @@ import java.util.List;
 
 import static gwangjang.server.domain.comment.domain.entity.QComment.comment;
 
+
 public class CommentCustomRepositoryImpl implements CommentCustomRepository {
 
 
