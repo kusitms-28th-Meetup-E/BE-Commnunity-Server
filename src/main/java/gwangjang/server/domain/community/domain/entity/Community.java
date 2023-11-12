@@ -1,11 +1,15 @@
 package gwangjang.server.domain.community.domain.entity;
 
+import gwangjang.server.domain.comment.domain.entity.Comment;
 import gwangjang.server.global.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,4 +33,10 @@ public class Community extends BaseEntity {
     private String keyword; //변하지 않음, contentsId로 가져오기
     private String issue; //변하지 않음 , contentsId로 가져오기
     private String domain; //변하지 않음, contentsId로 가져오기
+
+    @OneToMany(fetch = FetchType.LAZY)
+    List<Comment> comments = new ArrayList<>();
+
 }
+
+

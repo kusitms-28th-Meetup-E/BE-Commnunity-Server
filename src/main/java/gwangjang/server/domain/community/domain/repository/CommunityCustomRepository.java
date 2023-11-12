@@ -8,5 +8,9 @@ import java.util.Optional;
 public interface CommunityCustomRepository {
 
 
-    Optional<List<CommunityRes>> findCommunityByDomain(String domain);
+    Optional<List<CommunityRes>> findAllCommunityByDomain(String domain);
+    Optional<List<CommunityRes>> findAllCommunity();
+    Optional<CommunityRes> findCommunity(Long communityId);
+    Optional<List<CommunityRes>> findCommunityTop5ByHeartsAndDomain(String domain);
+
 }

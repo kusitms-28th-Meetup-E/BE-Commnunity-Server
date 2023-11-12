@@ -13,7 +13,8 @@ public enum ErrorCode {
     NOT_FOUND_REFRESH_TOKEN_ERROR( "J0008",  "유효하지 않는 RefreshToken 입니다."),
 
 
-    NOT_FOUND_COMMUNITY_ERROR("C001", "해당 커뮤니티 글을 찾을 수 없습니다");
+    NOT_FOUND_COMMUNITY_ERROR("C001", "해당 커뮤니티 글을 찾을 수 없습니다"),
+    NOT_FOUND_COMMENT_ERROR("CM001", "해당 댓글을 찾을 수 없습니다");
 
     private String errorCode;
     private String message;

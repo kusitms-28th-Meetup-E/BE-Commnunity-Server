@@ -20,6 +20,20 @@ public class CommunityReadUseCase {
     public List<CommunityRes> getCommunityList(String domain) {
 //        domainGetService.getDomainByName(domain)
 
-        return communityQueryService.getCommunityByDomain(domain);
+        return communityQueryService.getAllCommunityByDomain(domain);
+    }
+    public List<CommunityRes> getAllCommunityList() {
+//        domainGetService.getDomainByName(domain)
+
+        return communityQueryService.getAllCommunity();
+    }
+    public CommunityRes getCommunityDetail(String domain,Long communityId) {
+//        domainGetService.getDomainByName(domain)
+        return communityQueryService.getCommunity(communityId);
+    }
+
+    public List<CommunityRes> getCommunityTop5ByHeartsAndDomain(String domain) {
+
+        return communityQueryService.getCommunityTop5ByHeartsAndDomain(domain);
     }
 }

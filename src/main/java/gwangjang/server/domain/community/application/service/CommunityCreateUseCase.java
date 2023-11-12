@@ -29,7 +29,7 @@ public class CommunityCreateUseCase {
 
     private final CommunityMapper communityMapper = new CommunityMapper();
 
-    public CommunityRes createCommunity(String socialId, Long contentsId, CommunityReq communityReq) {
+    public CommunityRes create(String socialId, Long contentsId, CommunityReq communityReq) {
 
         MemberDto memberDto = findMemberFeignClient.getMemberBySocialId(socialId);
 //        ContentsDto contentsDto = findContentsFeignClient.getContents(contentsId);'
