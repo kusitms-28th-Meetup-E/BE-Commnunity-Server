@@ -25,7 +25,8 @@ public class HeartCustomRepositoryImpl implements HeartCustomRepository {
         return Optional.ofNullable(queryFactory
                 .select(Projections.constructor(HeartRes.class,
                         heart.pusherId,
-                        heart.community.id
+                        heart.community.id,
+                        heart.status
                 ))
                 .from(heart)
                 .where(
@@ -40,7 +41,8 @@ public class HeartCustomRepositoryImpl implements HeartCustomRepository {
         return Optional.ofNullable(queryFactory
                 .select(Projections.constructor(HeartRes.class,
                         heart.pusherId,
-                        heart.community.id
+                        heart.community.id,
+                        heart.status
                 ))
                 .from(heart)
                 .where(
