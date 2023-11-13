@@ -40,6 +40,7 @@ public class HeartUpdateUseCase {
             // new
             Community community = communityQueryService.getCommunityById(communityId);
             Heart save = heartSaveService.save(heartMapper.mapToHeart(pusherId, community, heartStatus));
+            community.updateHearts(save);
             return heartMapper.mapToHeartRes(save);
         }
 

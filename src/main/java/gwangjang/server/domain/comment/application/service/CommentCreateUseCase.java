@@ -33,6 +33,7 @@ public class CommentCreateUseCase {
         Community community = communityQueryService.getCommunityById(communityId);
 
         Comment comment = commentSaveService.save(commentMapper.mapToComment(socialId, community, commentReq));
+        community.updateComments(comment);
 
         return commentMapper.mapToCommentRes(memberDto, comment);
 

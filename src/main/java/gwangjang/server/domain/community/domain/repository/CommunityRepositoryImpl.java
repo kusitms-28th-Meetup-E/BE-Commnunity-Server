@@ -32,7 +32,9 @@ public class CommunityRepositoryImpl implements CommunityCustomRepository {
                                 community.writerId,
                                 community.domain,
                                 community.issue,
-                                community.keyword
+                                community.keyword,
+                                community.hearts.size().longValue(),
+                                community.comments.size().longValue()
                         ))
                         .from(community)
                         .where(community.domain.eq(domain))
@@ -52,7 +54,9 @@ public class CommunityRepositoryImpl implements CommunityCustomRepository {
                                 community.writerId,
                                 community.domain,
                                 community.issue,
-                                community.keyword
+                                community.keyword,
+                                community.hearts.size().longValue(),
+                                community.comments.size().longValue()
                         ))
                         .from(community)
                         .orderBy(community.createdAt.desc())
@@ -72,7 +76,9 @@ public class CommunityRepositoryImpl implements CommunityCustomRepository {
                                 community.writerId,
                                 community.domain,
                                 community.issue,
-                                community.keyword
+                                community.keyword,
+                                community.hearts.size().longValue(),
+                                community.comments.size().longValue()
                         ))
                         .from(community)
                         .where(community.id.eq(communityId))

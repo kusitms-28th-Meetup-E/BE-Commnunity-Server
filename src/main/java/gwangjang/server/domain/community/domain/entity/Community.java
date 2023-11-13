@@ -41,6 +41,15 @@ public class Community extends BaseEntity {
     @OneToMany(fetch = FetchType.LAZY)
     List<Heart> hearts = new ArrayList<>();
 
+
+    public void updateComments(Comment comment) {
+        this.comments.add(comment);
+    }
+
+    public void updateHearts(Heart heart) {
+        this.hearts.add(heart);
+    }
+
 }
 
 

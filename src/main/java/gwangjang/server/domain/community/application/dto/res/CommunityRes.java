@@ -27,7 +27,8 @@ public class CommunityRes {
     private Long heartsNum;
     private Long commentsNum;
 
-    public CommunityRes(Long id, String title,String talk, LocalDateTime createdAt, String writerId, String domain, String issue, String keyword) {
+    public CommunityRes(Long id, String title,String talk, LocalDateTime createdAt, String writerId,
+                        String domain, String issue, String keyword, Long heartsNum, Long commentsNum) {
         this.id = id;
         this.title = title;
         this.talk = talk;
@@ -36,6 +37,8 @@ public class CommunityRes {
         this.domain = domain;
         this.issue = issue;
         this.keyword = keyword;
+        this.heartsNum = heartsNum;
+        this.commentsNum = commentsNum;
     }
 
     public CommunityRes(String nickname, String profileImg) {
