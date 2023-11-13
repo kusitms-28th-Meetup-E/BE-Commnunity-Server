@@ -1,6 +1,7 @@
 package gwangjang.server.domain.community.domain.entity;
 
 import gwangjang.server.domain.comment.domain.entity.Comment;
+import gwangjang.server.domain.heart.domain.entity.Heart;
 import gwangjang.server.global.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -36,6 +37,9 @@ public class Community extends BaseEntity {
 
     @OneToMany(fetch = FetchType.LAZY)
     List<Comment> comments = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY)
+    List<Heart> hearts = new ArrayList<>();
 
 }
 
