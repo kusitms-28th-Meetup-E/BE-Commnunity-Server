@@ -13,6 +13,7 @@ public class HeartMapper {
         return HeartRes.builder()
                 .pusherId(heart.getPusherId())
                 .communityId(heart.getCommunity().getId())
+                .status(String.valueOf(heart.isStatus()))
                 .build();
     }
 

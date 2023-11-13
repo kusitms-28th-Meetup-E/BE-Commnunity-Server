@@ -10,4 +10,5 @@ import lombok.*;
 public class HeartRes {
     private String pusherId;
     private Long communityId;
+    private String status;
 }
