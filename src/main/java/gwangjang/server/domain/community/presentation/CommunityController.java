@@ -27,7 +27,7 @@ public class CommunityController {
      * @param communityReq 커뮤니티 글 내용
      * @return
      */
-    @PostMapping("contents/{contentsId}")
+    @PostMapping("/contents/{contentsId}")
     public ResponseEntity<SuccessResponse<CommunityRes>> createCommunity(@RequestHeader(value = "user-id") String socialId, @PathVariable("contentsId") Long contentsId, @RequestBody CommunityReq communityReq) {
         return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.CREATE_COMMUNITY_SUCCESS.getMessage(), this.communityCreateUseCase.create(socialId, contentsId, communityReq)));
     }
@@ -35,7 +35,7 @@ public class CommunityController {
 
     /**
      * 커뮤니티 글 리스트업(전체)
-     *
+     *ㄷㄱㄷ
      * @return
      */
     @GetMapping("")
