@@ -14,6 +14,6 @@ public class ContentsDto {
 
     private String keyword;
     private String issue;
-    private String domain;
+    private String topic;
 
 }

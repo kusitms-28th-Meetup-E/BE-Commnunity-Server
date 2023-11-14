@@ -46,22 +46,22 @@ public class CommunityController {
 
     /**
      * 커뮤니티 글 리스트업(영역별)
-     * @param domain 영역 정보
+     * @param topic 영역 정보
      * @return
      */
-    @GetMapping("/domain/{domain}")
-    public ResponseEntity<SuccessResponse<List<CommunityRes>>> getCommunityListByDomain(@PathVariable String domain) {
-        return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityList(domain)));
+    @GetMapping("/topic/{topic}")
+    public ResponseEntity<SuccessResponse<List<CommunityRes>>> getCommunityListByDomain(@PathVariable String topic) {
+        return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityList(topic)));
     }
 
     /**
      * 커뮤니티 글 리스트텁(상세)
-     * @param domain 영역 정보
+     * @param topic 영역 정보
      * @return
      */
-    @GetMapping("/domain/{domain}/community/{communityId}")
-    public ResponseEntity<SuccessResponse<CommunityRes>> getCommunityDetail(@PathVariable("domain") String domain, @PathVariable("communityId") Long communityId) {
-        return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityDetail(domain,communityId)));
+    @GetMapping("/topic/{topic}/community/{communityId}")
+    public ResponseEntity<SuccessResponse<CommunityRes>> getCommunityDetail(@PathVariable("topic") String topic, @PathVariable("communityId") Long communityId) {
+        return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityDetail(topic,communityId)));
     }
 
 
