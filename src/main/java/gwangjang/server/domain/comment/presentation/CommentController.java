@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/contents/{contentsId}/community/{communityId}/comments")
+@RequestMapping("/domain/{domain}/community/{communityId}/comments")
 public class CommentController {
 
     private final CommentCreateUseCase commentCreateUseCase;
@@ -28,13 +28,13 @@ public class CommentController {
 
     @PostMapping
     public ResponseEntity<SuccessResponse<List<CommentRes>>> createComment(@RequestHeader(value = "user-id") String socialId,
-                                                                     @PathVariable("contentsId") Long contentsId,@PathVariable("communityId") Long communityId, @RequestBody CommentReq commentReq) {
+                                                                     @PathVariable("domain") String domain,@PathVariable("communityId") Long communityId, @RequestBody CommentReq commentReq) {
         return ResponseEntity.ok(SuccessResponse.create(CommentResponseMessage.CREATE_COMMENT_SUCCESS.getMessage(), this.commentCreateUseCase.create(socialId, communityId, commentReq)));
     }
 
     @GetMapping
     public ResponseEntity<SuccessResponse<List<CommentRes>>> getComments(@RequestHeader(value = "user-id") String socialId,
-                                                                         @PathVariable("contentsId") Long contentsId,@PathVariable("communityId") Long communityId) {
+                                                                         @PathVariable("domain") String domain,@PathVariable("communityId") Long communityId) {
         return ResponseEntity.ok(SuccessResponse.create(CommentResponseMessage.GET_COMMENT_SUCCESS.getMessage(), this.commentReadUseCase.getCommentsByCommunity(communityId)));
     }
 }
