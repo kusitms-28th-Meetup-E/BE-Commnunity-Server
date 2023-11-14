@@ -90,7 +90,7 @@ bootJar{
     archiveVersion = "0.0.1"
 }
 
-def generated = 'src/main/generated'
+def generated = 'src/main/generated/querydsl'
 
 tasks.withType(JavaCompile) {
     options.getGeneratedSourceOutputDirectory().set(file(generated))

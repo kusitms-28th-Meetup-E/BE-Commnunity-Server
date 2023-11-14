@@ -24,6 +24,7 @@ public class CommentCreateUseCase {
     private final CommentSaveService commentSaveService;
     private final CommentQueryService commentQueryService;
     private final CommunityQueryService communityQueryService;
+    private final CommentReadUseCase commentReadUseCase;
 
 
     private final FindMemberFeignClient findMemberFeignClient;
@@ -39,7 +40,7 @@ public class CommentCreateUseCase {
         Comment comment = commentSaveService.save(commentMapper.mapToComment(socialId, community, commentReq));
         community.updateComments(comment);
 
-        return commentQueryService.getCommentsByCommunityId(communityId);
+        return commentReadUseCase.getCommentsByCommunity(communityId);
 //        return commentMapper.mapToCommentRes(memberDto, comment);
 
     }
