@@ -12,6 +12,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static gwangjang.server.domain.heart.presentation.constant.HeartCommunityResponse.PUSH_HEART_SUCCESS;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("/contents/{contentsId}/community/{communityId}/heart")
@@ -23,7 +25,7 @@ public class HeartController {
     public ResponseEntity<SuccessResponse<HeartRes>> pushHeart(@RequestHeader(value = "user-id") String socialId,
                                                                @PathVariable("contentsId") Long contentsId, @PathVariable("communityId") Long communityId,
                                                                @PathVariable("heartStatus") String heartStatus) {
-        return ResponseEntity.ok(SuccessResponse.create(CommentResponseMessage.CREATE_COMMENT_SUCCESS.getMessage(), this.heartUpdateUseCase.pushHeart(socialId, communityId,heartStatus)));
+        return ResponseEntity.ok(SuccessResponse.create(PUSH_HEART_SUCCESS.getMessage(), this.heartUpdateUseCase.pushHeart(socialId, communityId,heartStatus)));
     }
 
 }
