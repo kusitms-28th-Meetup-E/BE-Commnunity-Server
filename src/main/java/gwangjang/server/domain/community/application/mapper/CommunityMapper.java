@@ -28,14 +28,14 @@ public class CommunityMapper {
                 .id(community.getId())
                 .title(community.getTitle())
                 .talk(community.getTalk())
-                .createdAt(community.getCreatedAt().toString())
+                .date(community.getCreatedAt().toString())
                 .writerId(memberDto.getMemberId())
                 .nickname(memberDto.getNickname())
                 .profileImg(memberDto.getProfileImage())
 
                 .keyword(contentsDto.getKeyword())
                 .issue(contentsDto.getIssue())
-                .domain(contentsDto.getTopic())
+                .topic(contentsDto.getTopic())
                 .build();
     }
 

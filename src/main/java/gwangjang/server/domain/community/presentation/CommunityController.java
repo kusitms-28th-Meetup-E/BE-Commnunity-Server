@@ -50,7 +50,7 @@ public class CommunityController {
      * @return
      */
     @GetMapping("/topic/{topic}")
-    public ResponseEntity<SuccessResponse<List<CommunityRes>>> getCommunityListByDomain(@PathVariable String topic) {
+    public ResponseEntity<SuccessResponse<List<CommunityRes>>> getCommunityListByDomain(@PathVariable("topic") String topic) {
         return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityList(topic)));
     }
 
@@ -62,6 +62,17 @@ public class CommunityController {
     @GetMapping("/topic/{topic}/community/{communityId}")
     public ResponseEntity<SuccessResponse<CommunityRes>> getCommunityDetail(@PathVariable("topic") String topic, @PathVariable("communityId") Long communityId) {
         return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityDetail(topic,communityId)));
+    }
+
+    /**
+     * 커뮤니티 글 top5(영역/주제/키워드)
+     * @param sortBy 정렬 조건
+     * @param word 정렬 단어
+     * @return
+     */
+    @GetMapping("/sortBy/{sortBy}/word/{word}")
+    public ResponseEntity<SuccessResponse<List<CommunityRes>>> getCommunityTop5(@PathVariable("sortBy") String sortBy,@PathVariable("word") String word ) {
+        return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityTop5ByHearts(sortBy,word)));
     }
 
 

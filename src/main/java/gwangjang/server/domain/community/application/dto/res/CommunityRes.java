@@ -14,27 +14,27 @@ public class CommunityRes {
     private Long id;
     private String title;
     private String talk;
-    private String createdAt;
+    private String date;
 
     private String writerId;
     private String nickname;
     private String profileImg;
 
-    private String domain;
+    private String topic;
     private String issue;
     private String keyword;
 
     private Long heartsNum;
     private Long commentsNum;
 
-    public CommunityRes(Long id, String title,String talk, LocalDateTime createdAt, String writerId,
-                        String domain, String issue, String keyword, Long heartsNum, Long commentsNum) {
+    public CommunityRes(Long id, String title, String talk, LocalDateTime date, String writerId,
+                        String topic, String issue, String keyword, Long heartsNum, Long commentsNum) {
         this.id = id;
         this.title = title;
         this.talk = talk;
-        this.createdAt = createdAt.toString();
+        this.date = date.toString();
         this.writerId = writerId;
-        this.domain = domain;
+        this.topic = topic;
         this.issue = issue;
         this.keyword = keyword;
         this.heartsNum = heartsNum;
