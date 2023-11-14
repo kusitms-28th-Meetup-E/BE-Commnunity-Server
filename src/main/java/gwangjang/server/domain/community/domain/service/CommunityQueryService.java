@@ -63,6 +63,17 @@ public class CommunityQueryService {
     }
 
     public List<CommunityRes> getCommunityTop5(CommunityOrderCondition communityOrderCondition, String with) {
-        return communityRepository.findCommunityTop5(communityOrderCondition, with).orElseThrow(NotFoundCommunityException::new);
+        List<CommunityRes> communityRes = communityRepository.findCommunityTop5(communityOrderCondition, with).orElseThrow(NotFoundCommunityException::new);
+
+        communityRes.stream().forEach(
+                communityRes1 ->
+                {
+                    String writerId = communityRes1.getWriterId();
+                    MemberDto memberDto = findMemberFeignClient.getMemberBySocialId(writerId);
+                    communityRes1.updateMemberDto(memberDto);
+                }
+        );
+
+        return communityRes;
     }
 }

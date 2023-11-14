@@ -130,6 +130,8 @@ public class CommunityRepositoryImpl implements CommunityCustomRepository {
             return community.keyword.eq(word);
         } else if (orderCondition.equals(CommunityOrderCondition.ISSUE)) {
             return community.issue.eq(word);
+        } else if (orderCondition.equals(CommunityOrderCondition.ALL)) {
+            return null;
         } else{
             return community.topic.eq(word);
         }
