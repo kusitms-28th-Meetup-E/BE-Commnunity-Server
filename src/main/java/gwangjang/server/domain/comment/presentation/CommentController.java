@@ -27,7 +27,7 @@ public class CommentController {
     private final CommentReadUseCase commentReadUseCase;
 
     @PostMapping
-    public ResponseEntity<SuccessResponse<CommentRes>> createComment(@RequestHeader(value = "user-id") String socialId,
+    public ResponseEntity<SuccessResponse<List<CommentRes>>> createComment(@RequestHeader(value = "user-id") String socialId,
                                                                      @PathVariable("contentsId") Long contentsId,@PathVariable("communityId") Long communityId, @RequestBody CommentReq commentReq) {
         return ResponseEntity.ok(SuccessResponse.create(CommentResponseMessage.CREATE_COMMENT_SUCCESS.getMessage(), this.commentCreateUseCase.create(socialId, communityId, commentReq)));
     }

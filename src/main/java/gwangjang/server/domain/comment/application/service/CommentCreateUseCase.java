@@ -4,6 +4,7 @@ import gwangjang.server.domain.comment.application.dto.req.CommentReq;
 import gwangjang.server.domain.comment.application.dto.res.CommentRes;
 import gwangjang.server.domain.comment.application.mapper.CommentMapper;
 import gwangjang.server.domain.comment.domain.entity.Comment;
+import gwangjang.server.domain.comment.domain.service.CommentQueryService;
 import gwangjang.server.domain.comment.domain.service.CommentSaveService;
 import gwangjang.server.domain.community.application.dto.res.MemberDto;
 import gwangjang.server.domain.community.domain.entity.Community;
@@ -13,12 +14,15 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class CommentCreateUseCase {
 
     private final CommentSaveService commentSaveService;
+    private final CommentQueryService commentQueryService;
     private final CommunityQueryService communityQueryService;
 
 
@@ -27,14 +31,15 @@ public class CommentCreateUseCase {
 
     private final CommentMapper commentMapper = new CommentMapper();
 
-    public CommentRes create(String socialId, Long communityId, CommentReq commentReq) {
+    public List<CommentRes> create(String socialId, Long communityId, CommentReq commentReq) {
 
         MemberDto memberDto = findMemberFeignClient.getMemberBySocialId(socialId);
         Community community = communityQueryService.getCommunityById(communityId);
 
         Comment comment = commentSaveService.save(commentMapper.mapToComment(socialId, community, commentReq));
 
-        return commentMapper.mapToCommentRes(memberDto, comment);
+        return commentQueryService.getCommentsByCommunityId(communityId);
+//        return commentMapper.mapToCommentRes(memberDto, comment);
 
     }
 }
