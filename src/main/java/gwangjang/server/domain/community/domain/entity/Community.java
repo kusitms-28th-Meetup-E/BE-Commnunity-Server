@@ -33,7 +33,7 @@ public class Community extends BaseEntity {
 
     private String keyword; //변하지 않음, contentsId로 가져오기
     private String issue; //변하지 않음 , contentsId로 가져오기
-    private String domain; //변하지 않음, contentsId로 가져오기
+    private String topic; //변하지 않음, contentsId로 가져오기
 
     @OneToMany(fetch = FetchType.LAZY)
     List<Comment> comments = new ArrayList<>();
