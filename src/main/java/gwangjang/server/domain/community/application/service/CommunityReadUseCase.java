@@ -18,9 +18,10 @@ public class CommunityReadUseCase {
 //    private final DomainGetService domainGetService;
 
 
-    public List<CommunityRes> getCommunityList(String topic) {
+    public List<CommunityRes> getCommunityList(Long topicId) {
 //        domainGetService.getDomainByName(domain)
 
+        String topic = "환경"; //topicId to topicString
         return communityQueryService.getAllCommunityByTopic(topic);
     }
     public List<CommunityRes> getAllCommunityList() {
@@ -28,12 +29,16 @@ public class CommunityReadUseCase {
 
         return communityQueryService.getAllCommunity();
     }
-    public CommunityRes getCommunityDetail(String domain,Long communityId) {
+    public CommunityRes getCommunityDetail(Long topicId,Long communityId) {
 //        domainGetService.getDomainByName(domain)
+
         return communityQueryService.getCommunity(communityId);
     }
 
-    public List<CommunityRes> getCommunityTop5ByHearts(String orderBy, String word) {
+    public List<CommunityRes> getCommunityTop5ByHearts(String orderBy, Long wordId) {
+
+//        orderBy + word -> string
+        String word = "환경";
 
         return communityQueryService.getCommunityTop5(CommunityOrderCondition.valueOf(orderBy), word);
     }

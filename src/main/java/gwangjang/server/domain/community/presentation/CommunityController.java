@@ -49,9 +49,9 @@ public class CommunityController {
      * @param topic 영역 정보
      * @return
      */
-    @GetMapping("/topic/{topic}")
-    public ResponseEntity<SuccessResponse<List<CommunityRes>>> getCommunityListByDomain(@PathVariable("topic") String topic) {
-        return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityList(topic)));
+    @GetMapping("/topic/{topicId}")
+    public ResponseEntity<SuccessResponse<List<CommunityRes>>> getCommunityListByDomain(@PathVariable("topicId") Long topicId) {
+        return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityList(topicId)));
     }
 
     /**
@@ -59,9 +59,9 @@ public class CommunityController {
      * @param topic 영역 정보
      * @return
      */
-    @GetMapping("/topic/{topic}/community/{communityId}")
-    public ResponseEntity<SuccessResponse<CommunityRes>> getCommunityDetail(@PathVariable("topic") String topic, @PathVariable("communityId") Long communityId) {
-        return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityDetail(topic,communityId)));
+    @GetMapping("/topic/{topicId}/community/{communityId}")
+    public ResponseEntity<SuccessResponse<CommunityRes>> getCommunityDetail(@PathVariable("topicId") Long topicId, @PathVariable("communityId") Long communityId) {
+        return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityDetail(topicId,communityId)));
     }
 
     /**
@@ -70,9 +70,9 @@ public class CommunityController {
      * @param word 정렬 단어
      * @return
      */
-    @GetMapping("/sortBy/{sortBy}/word/{word}")
-    public ResponseEntity<SuccessResponse<List<CommunityRes>>> getCommunityTop5(@PathVariable("sortBy") String sortBy,@PathVariable("word") String word ) {
-        return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityTop5ByHearts(sortBy,word)));
+    @GetMapping("/sortBy/{sortBy}/word/{wordId}")
+    public ResponseEntity<SuccessResponse<List<CommunityRes>>> getCommunityTop5(@PathVariable("sortBy") String sortBy,@PathVariable("wordId") Long wordId ) {
+        return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityTop5ByHearts(sortBy,wordId)));
     }
 
 
