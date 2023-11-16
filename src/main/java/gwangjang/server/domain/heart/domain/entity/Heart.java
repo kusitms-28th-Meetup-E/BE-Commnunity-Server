@@ -31,7 +31,11 @@ public class Heart extends BaseEntity {
     private boolean status;
 
 
-    public void updateHeart(String status) {
-        this.status = Boolean.parseBoolean(status);
+    public void updateHeart() {
+        if (this.status) {
+            this.status = Boolean.FALSE;
+        } else{
+            this.status = Boolean.TRUE;
+        }
     }
 }

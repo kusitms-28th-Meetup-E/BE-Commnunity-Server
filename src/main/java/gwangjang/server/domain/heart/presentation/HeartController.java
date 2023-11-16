@@ -21,11 +21,10 @@ public class HeartController {
 
     private final HeartUpdateUseCase heartUpdateUseCase;
 
-    @PutMapping("/{heartStatus}")
+    @PutMapping
     public ResponseEntity<SuccessResponse<HeartRes>> pushHeart(@RequestHeader(value = "user-id") String socialId,
-                                                               @PathVariable("topicId") Long topicId, @PathVariable("communityId") Long communityId,
-                                                               @PathVariable("heartStatus") String heartStatus) {
-        return ResponseEntity.ok(SuccessResponse.create(PUSH_HEART_SUCCESS.getMessage(), this.heartUpdateUseCase.pushHeart(socialId, communityId,heartStatus)));
+                                                               @PathVariable("topicId") Long topicId, @PathVariable("communityId") Long communityId) {
+        return ResponseEntity.ok(SuccessResponse.create(PUSH_HEART_SUCCESS.getMessage(), this.heartUpdateUseCase.pushHeart(socialId, communityId)));
     }
 
 }

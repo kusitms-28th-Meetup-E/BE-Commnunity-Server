@@ -53,7 +53,13 @@ public class CommunityQueryService {
 
 
     public CommunityRes getCommunity(String memberId,Long communityId) {
-        return communityRepository.findCommunity(memberId,communityId).orElseThrow(NotFoundCommunityException::new);
+        CommunityRes communityRes = communityRepository.findCommunity(memberId, communityId).orElseThrow(NotFoundCommunityException::new);
+
+        String writerId = communityRes.getWriterId();
+        MemberDto memberDto = findMemberFeignClient.getMemberBySocialId(writerId);
+        communityRes.updateMemberDto(memberDto);
+
+        return communityRes;
     }
 
 
