@@ -20,8 +20,6 @@ public class CommunityQueryService {
     private final CommunityRepository communityRepository;
     private final FindMemberFeignClient findMemberFeignClient;
 
-    private final CommunityMapper communityMapper = new CommunityMapper();
-
     public Community getCommunityById(Long communityId) {
         return communityRepository.findById(communityId).orElseThrow(NotFoundCommunityException::new
         );
@@ -58,9 +56,6 @@ public class CommunityQueryService {
         return communityRepository.findCommunity(communityId).orElseThrow(NotFoundCommunityException::new);
     }
 
-    public List<CommunityRes> getCommunityTop5ByHeartsAndTopic(String topic) {
-        return communityRepository.findCommunityTop5ByHeartsAndTopic(topic).orElseThrow(NotFoundCommunityException::new);
-    }
 
     public List<CommunityRes> getCommunityTop5(CommunityOrderCondition communityOrderCondition, String with) {
         List<CommunityRes> communityRes = communityRepository.findCommunityTop5(communityOrderCondition, with).orElseThrow(NotFoundCommunityException::new);

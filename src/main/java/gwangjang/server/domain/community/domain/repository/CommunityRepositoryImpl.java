@@ -31,7 +31,6 @@ public class CommunityRepositoryImpl implements CommunityCustomRepository {
                 queryFactory
                         .select(Projections.constructor(CommunityRes.class,
                                 community.id,
-                                community.title,
                                 community.talk,
                                 community.createdAt,
                                 community.writerId,
@@ -39,7 +38,8 @@ public class CommunityRepositoryImpl implements CommunityCustomRepository {
                                 community.issue,
                                 community.keyword,
                                 community.hearts.size().longValue(),
-                                community.comments.size().longValue()
+                                community.comments.size().longValue(),
+                                community.contentsId
                         ))
                         .from(community)
                         .where(community.topic.eq(topic))
@@ -53,7 +53,6 @@ public class CommunityRepositoryImpl implements CommunityCustomRepository {
                 queryFactory
                         .select(Projections.constructor(CommunityRes.class,
                                 community.id,
-                                community.title,
                                 community.talk,
                                 community.createdAt,
                                 community.writerId,
@@ -61,7 +60,8 @@ public class CommunityRepositoryImpl implements CommunityCustomRepository {
                                 community.issue,
                                 community.keyword,
                                 community.hearts.size().longValue(),
-                                community.comments.size().longValue()
+                                community.comments.size().longValue(),
+                                community.contentsId
                         ))
                         .from(community)
                         .orderBy(community.createdAt.desc())
@@ -75,7 +75,6 @@ public class CommunityRepositoryImpl implements CommunityCustomRepository {
                 queryFactory
                         .select(Projections.constructor(CommunityRes.class,
                                 community.id,
-                                community.title,
                                 community.talk,
                                 community.createdAt,
                                 community.writerId,
@@ -83,7 +82,8 @@ public class CommunityRepositoryImpl implements CommunityCustomRepository {
                                 community.issue,
                                 community.keyword,
                                 community.hearts.size().longValue(),
-                                community.comments.size().longValue()
+                                community.comments.size().longValue(),
+                                community.contentsId
                         ))
                         .from(community)
                         .where(community.id.eq(communityId))
@@ -103,7 +103,6 @@ public class CommunityRepositoryImpl implements CommunityCustomRepository {
         return Optional.ofNullable(queryFactory
                 .select(Projections.constructor(CommunityRes.class,
                         community.id,
-                        community.title,
                         community.talk,
                         community.createdAt,
                         community.writerId,
@@ -111,7 +110,8 @@ public class CommunityRepositoryImpl implements CommunityCustomRepository {
                         community.issue,
                         community.keyword,
                         community.hearts.size().longValue(),
-                        community.comments.size().longValue()
+                        community.comments.size().longValue(),
+                        community.contentsId
                 ))
                 .from(community)
                 .where(

@@ -23,14 +23,13 @@ public class Community extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "community_id")
     private Long id;
-    private String title;
     private String talk;
 
     private String writerId;
 
     private Long contentsId; //keyword,issue,domain 불러오기 위함
-    private String contents; // 인용하기 위함
-
+//    private String contents; // 인용하기 위함
+//
     private String keyword; //변하지 않음, contentsId로 가져오기
     private String issue; //변하지 않음 , contentsId로 가져오기
     private String topic; //변하지 않음, contentsId로 가져오기

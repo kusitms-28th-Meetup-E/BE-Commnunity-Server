@@ -11,8 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CommunityReq {
-
-    private String title;
-    private String talk;
+    private String communityText;
 
 }
