@@ -16,14 +16,14 @@ import static gwangjang.server.domain.heart.presentation.constant.HeartCommunity
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/topic/{topic}/community/{communityId}/heart")
+@RequestMapping("/topic/{topicId}/community/{communityId}/heart")
 public class HeartController {
 
     private final HeartUpdateUseCase heartUpdateUseCase;
 
     @PutMapping("/{heartStatus}")
     public ResponseEntity<SuccessResponse<HeartRes>> pushHeart(@RequestHeader(value = "user-id") String socialId,
-                                                               @PathVariable("topic") String topic, @PathVariable("communityId") Long communityId,
+                                                               @PathVariable("topicId") Long topicId, @PathVariable("communityId") Long communityId,
                                                                @PathVariable("heartStatus") String heartStatus) {
         return ResponseEntity.ok(SuccessResponse.create(PUSH_HEART_SUCCESS.getMessage(), this.heartUpdateUseCase.pushHeart(socialId, communityId,heartStatus)));
     }
