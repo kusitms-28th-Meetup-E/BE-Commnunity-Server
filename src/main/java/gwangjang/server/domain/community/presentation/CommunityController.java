@@ -39,29 +39,29 @@ public class CommunityController {
      * @return
      */
     @GetMapping("")
-    public ResponseEntity<SuccessResponse<List<CommunityRes>>> getCommunityList() {
-        return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getAllCommunityList()));
+    public ResponseEntity<SuccessResponse<List<CommunityRes>>> getCommunityList(@RequestHeader(value = "user-id") String socialId ) {
+        return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getAllCommunityList(socialId)));
     }
 
 
     /**
      * 커뮤니티 글 리스트업(영역별)
-     * @param topic 영역 정보
+     * @param topicId 영역 정보
      * @return
      */
     @GetMapping("/topic/{topicId}")
-    public ResponseEntity<SuccessResponse<List<CommunityRes>>> getCommunityListByDomain(@PathVariable("topicId") Long topicId) {
-        return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityList(topicId)));
+    public ResponseEntity<SuccessResponse<List<CommunityRes>>> getCommunityListByDomain(@RequestHeader(value = "user-id") String socialId,@PathVariable("topicId") Long topicId) {
+        return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityList(socialId,topicId)));
     }
 
     /**
      * 커뮤니티 글 리스트텁(상세)
-     * @param topic 영역 정보
+     * @param topicId 영역 정보
      * @return
      */
     @GetMapping("/topic/{topicId}/community/{communityId}")
-    public ResponseEntity<SuccessResponse<CommunityRes>> getCommunityDetail(@PathVariable("topicId") Long topicId, @PathVariable("communityId") Long communityId) {
-        return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityDetail(topicId,communityId)));
+    public ResponseEntity<SuccessResponse<CommunityRes>> getCommunityDetail(@RequestHeader(value = "user-id") String socialId, @PathVariable("topicId") Long topicId, @PathVariable("communityId") Long communityId) {
+        return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityDetail(socialId,topicId,communityId)));
     }
 
     /**
@@ -71,8 +71,8 @@ public class CommunityController {
      * @return
      */
     @GetMapping("/sortBy/{sortBy}/word/{wordId}")
-    public ResponseEntity<SuccessResponse<List<CommunityRes>>> getCommunityTop5(@PathVariable("sortBy") String sortBy,@PathVariable("wordId") Long wordId ) {
-        return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityTop5ByHearts(sortBy,wordId)));
+    public ResponseEntity<SuccessResponse<List<CommunityRes>>> getCommunityTop5(@RequestHeader(value = "user-id") String socialId, @PathVariable("sortBy") String sortBy,@PathVariable("wordId") Long wordId ) {
+        return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityTop5ByHearts(socialId,sortBy,wordId)));
     }
 
 

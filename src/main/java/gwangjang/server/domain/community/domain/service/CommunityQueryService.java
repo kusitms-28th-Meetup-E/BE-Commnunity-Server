@@ -24,8 +24,8 @@ public class CommunityQueryService {
         return communityRepository.findById(communityId).orElseThrow(NotFoundCommunityException::new
         );
     }
-    public List<CommunityRes> getAllCommunityByTopic(String topic) {
-        List<CommunityRes> communityRes = communityRepository.findAllCommunityByTopic(topic).orElseThrow(NotFoundCommunityException::new);
+    public List<CommunityRes> getAllCommunityByTopic(String memberId,String topic) {
+        List<CommunityRes> communityRes = communityRepository.findAllCommunityByTopic(memberId,topic).orElseThrow(NotFoundCommunityException::new);
         communityRes.stream().forEach(
                 communityRes1 ->
                 {
@@ -37,8 +37,8 @@ public class CommunityQueryService {
 
         return communityRes;
     }
-    public List<CommunityRes> getAllCommunity() {
-        List<CommunityRes> communityRes = communityRepository.findAllCommunity().orElseThrow(NotFoundCommunityException::new);
+    public List<CommunityRes> getAllCommunity(String memberId) {
+        List<CommunityRes> communityRes = communityRepository.findAllCommunity(memberId).orElseThrow(NotFoundCommunityException::new);
         communityRes.stream().forEach(
                 communityRes1 ->
                 {
@@ -52,13 +52,13 @@ public class CommunityQueryService {
     }
 
 
-    public CommunityRes getCommunity(Long communityId) {
-        return communityRepository.findCommunity(communityId).orElseThrow(NotFoundCommunityException::new);
+    public CommunityRes getCommunity(String memberId,Long communityId) {
+        return communityRepository.findCommunity(memberId,communityId).orElseThrow(NotFoundCommunityException::new);
     }
 
 
-    public List<CommunityRes> getCommunityTop5(CommunityOrderCondition communityOrderCondition, String with) {
-        List<CommunityRes> communityRes = communityRepository.findCommunityTop5(communityOrderCondition, with).orElseThrow(NotFoundCommunityException::new);
+    public List<CommunityRes> getCommunityTop5(String memberId,CommunityOrderCondition communityOrderCondition, String with) {
+        List<CommunityRes> communityRes = communityRepository.findCommunityTop5(memberId,communityOrderCondition, with).orElseThrow(NotFoundCommunityException::new);
 
         communityRes.stream().forEach(
                 communityRes1 ->

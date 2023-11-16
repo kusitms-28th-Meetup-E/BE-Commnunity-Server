@@ -29,8 +29,10 @@ public class CommunityRes {
     private Long contentsId;
     private String contents;
 
+    private String likeStatus;
+
     public CommunityRes(Long id, String talk, LocalDateTime date, String writerId,
-                        String topic, String issue, String keyword, Long heartsNum, Long commentsNum,Long contentsId) {
+                        String topic, String issue, String keyword, Long heartsNum, Long commentsNum,Long contentsId, String likeStatus) {
         this.id = id;
         this.communityText = talk;
         this.date = date.toString();
@@ -41,6 +43,7 @@ public class CommunityRes {
         this.likeCount = heartsNum;
         this.commentCount = commentsNum;
         this.contentsId = contentsId;
+        this.likeStatus = likeStatus;
     }
 
     public CommunityRes(String nickname, String profileImg) {
