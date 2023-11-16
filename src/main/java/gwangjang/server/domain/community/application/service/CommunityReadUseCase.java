@@ -18,23 +18,28 @@ public class CommunityReadUseCase {
 //    private final DomainGetService domainGetService;
 
 
-    public List<CommunityRes> getCommunityList(String topic) {
+    public List<CommunityRes> getCommunityList(String memberId,Long topicId) {
 //        domainGetService.getDomainByName(domain)
 
-        return communityQueryService.getAllCommunityByTopic(topic);
+        String topic = "환경"; //topicId to topicString
+        return communityQueryService.getAllCommunityByTopic(memberId,topic);
     }
-    public List<CommunityRes> getAllCommunityList() {
+    public List<CommunityRes> getAllCommunityList(String memberId) {
 //        domainGetService.getDomainByName(domain)
 
-        return communityQueryService.getAllCommunity();
+        return communityQueryService.getAllCommunity(memberId);
     }
-    public CommunityRes getCommunityDetail(String domain,Long communityId) {
+    public CommunityRes getCommunityDetail(String memberId,Long topicId,Long communityId) {
 //        domainGetService.getDomainByName(domain)
-        return communityQueryService.getCommunity(communityId);
+
+        return communityQueryService.getCommunity(memberId,communityId);
     }
 
-    public List<CommunityRes> getCommunityTop5ByHearts(String orderBy, String word) {
+    public List<CommunityRes> getCommunityTop5ByHearts(String memberId,String orderBy, Long wordId) {
 
-        return communityQueryService.getCommunityTop5(CommunityOrderCondition.valueOf(orderBy), word);
+//        orderBy + word -> string
+        String word = "환경";
+
+        return communityQueryService.getCommunityTop5(memberId,CommunityOrderCondition.valueOf(orderBy), word);
     }
 }

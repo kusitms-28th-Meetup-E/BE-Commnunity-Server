@@ -17,11 +17,11 @@ public class HeartMapper {
                 .build();
     }
 
-    public Heart mapToHeart(String pusherId, Community community, String status) {
+    public Heart mapToHeart(String pusherId, Community community) {
         return Heart.builder()
                 .pusherId(pusherId)
                 .community(community)
-                .status(Boolean.parseBoolean(status))
+                .status(Boolean.TRUE)
                 .build();
     }
 }

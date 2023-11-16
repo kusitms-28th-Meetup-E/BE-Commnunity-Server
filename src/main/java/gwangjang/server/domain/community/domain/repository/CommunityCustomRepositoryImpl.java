@@ -1,37 +1,45 @@
 package gwangjang.server.domain.community.domain.repository;
 
-import com.querydsl.core.types.Order;
-import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import gwangjang.server.domain.community.application.dto.res.CommunityRes;
+import gwangjang.server.domain.community.domain.entity.Community;
 import gwangjang.server.domain.community.domain.entity.constant.CommunityOrderCondition;
 import jakarta.persistence.EntityManager;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import static gwangjang.server.domain.community.domain.entity.QCommunity.community;
+import static gwangjang.server.domain.heart.domain.entity.QHeart.heart;
 
-public class CommunityRepositoryImpl implements CommunityCustomRepository {
+public class CommunityCustomRepositoryImpl implements CommunityCustomRepository {
 
     private final JPAQueryFactory queryFactory;
 
-    public CommunityRepositoryImpl(EntityManager em) {
+    public CommunityCustomRepositoryImpl(EntityManager em) {
         this.queryFactory = new JPAQueryFactory(em);
     }
 
 
     @Override
-    public Optional<List<CommunityRes>> findAllCommunityByTopic(String topic) {
+    public Optional<List<CommunityRes>> findAllCommunityByTopic(String memberId,String topic) {
+
+        BooleanExpression memberHeartExists = JPAExpressions
+                .selectOne()
+                .from(heart)
+                .where(
+                        heart.community.id.eq(community.id),
+                        heart.pusherId.eq(memberId),
+                        heart.status.eq(Boolean.TRUE))
+                .exists();
+
         return Optional.ofNullable(
                 queryFactory
                         .select(Projections.constructor(CommunityRes.class,
                                 community.id,
-                                community.title,
                                 community.talk,
                                 community.createdAt,
                                 community.writerId,
@@ -39,7 +47,10 @@ public class CommunityRepositoryImpl implements CommunityCustomRepository {
                                 community.issue,
                                 community.keyword,
                                 community.hearts.size().longValue(),
-                                community.comments.size().longValue()
+                                community.comments.size().longValue(),
+                                community.contentsId,
+                                memberHeartExists.stringValue()
+
                         ))
                         .from(community)
                         .where(community.topic.eq(topic))
@@ -48,12 +59,21 @@ public class CommunityRepositoryImpl implements CommunityCustomRepository {
         );
     }
     @Override
-    public Optional<List<CommunityRes>> findAllCommunity() {
+    public Optional<List<CommunityRes>> findAllCommunity(String memberId) {
+
+        BooleanExpression memberHeartExists = JPAExpressions
+                .selectOne()
+                .from(heart)
+                .where(
+                        heart.community.id.eq(community.id),
+                        heart.pusherId.eq(memberId),
+                        heart.status.eq(Boolean.TRUE))
+                .exists();
+
         return Optional.ofNullable(
                 queryFactory
                         .select(Projections.constructor(CommunityRes.class,
                                 community.id,
-                                community.title,
                                 community.talk,
                                 community.createdAt,
                                 community.writerId,
@@ -61,7 +81,9 @@ public class CommunityRepositoryImpl implements CommunityCustomRepository {
                                 community.issue,
                                 community.keyword,
                                 community.hearts.size().longValue(),
-                                community.comments.size().longValue()
+                                community.comments.size().longValue(),
+                                community.contentsId,
+                                memberHeartExists.stringValue()
                         ))
                         .from(community)
                         .orderBy(community.createdAt.desc())
@@ -70,12 +92,20 @@ public class CommunityRepositoryImpl implements CommunityCustomRepository {
     }
 
     @Override
-    public Optional<CommunityRes> findCommunity(Long communityId) {
+    public Optional<CommunityRes> findCommunity(String memberId,Long communityId) {
+        BooleanExpression memberHeartExists = JPAExpressions
+                .selectOne()
+                .from(heart)
+                .where(
+                        heart.community.id.eq(community.id),
+                        heart.pusherId.eq(memberId),
+                        heart.status.eq(Boolean.TRUE))
+                .exists();
+
         return Optional.ofNullable(
                 queryFactory
                         .select(Projections.constructor(CommunityRes.class,
                                 community.id,
-                                community.title,
                                 community.talk,
                                 community.createdAt,
                                 community.writerId,
@@ -83,7 +113,9 @@ public class CommunityRepositoryImpl implements CommunityCustomRepository {
                                 community.issue,
                                 community.keyword,
                                 community.hearts.size().longValue(),
-                                community.comments.size().longValue()
+                                community.comments.size().longValue(),
+                                community.contentsId,
+                                memberHeartExists.stringValue()
                         ))
                         .from(community)
                         .where(community.id.eq(communityId))
@@ -92,18 +124,26 @@ public class CommunityRepositoryImpl implements CommunityCustomRepository {
     }
 
     @Override
-    public Optional<List<CommunityRes>> findCommunityTop5ByHeartsAndTopic(String topic) {
+    public Optional<List<CommunityRes>> findCommunityTop5ByHeartsAndTopic(String memberId,String topic) {
 
         return Optional.empty();
     }
 
     @Override
-    public Optional<List<CommunityRes>> findCommunityTop5(CommunityOrderCondition orderCondition, String word) {
+    public Optional<List<CommunityRes>> findCommunityTop5(String memberId,CommunityOrderCondition orderCondition, String word) {
+
+        BooleanExpression memberHeartExists = JPAExpressions
+                .selectOne()
+                .from(heart)
+                .where(
+                        heart.community.id.eq(community.id),
+                        heart.pusherId.eq(memberId),
+                        heart.status.eq(Boolean.TRUE))
+                .exists();
 
         return Optional.ofNullable(queryFactory
                 .select(Projections.constructor(CommunityRes.class,
                         community.id,
-                        community.title,
                         community.talk,
                         community.createdAt,
                         community.writerId,
@@ -111,7 +151,9 @@ public class CommunityRepositoryImpl implements CommunityCustomRepository {
                         community.issue,
                         community.keyword,
                         community.hearts.size().longValue(),
-                        community.comments.size().longValue()
+                        community.comments.size().longValue(),
+                        community.contentsId,
+                        memberHeartExists.stringValue()
                 ))
                 .from(community)
                 .where(

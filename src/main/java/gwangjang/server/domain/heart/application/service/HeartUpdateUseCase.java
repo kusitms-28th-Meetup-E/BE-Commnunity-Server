@@ -27,19 +27,19 @@ public class HeartUpdateUseCase {
 
     private final HeartMapper heartMapper = new HeartMapper();
 
-    public HeartRes pushHeart(String pusherId, Long communityId, String heartStatus) {
+    public HeartRes pushHeart(String pusherId, Long communityId) {
 
         Optional<Heart> heart = heartQueryService.getHeartById(pusherId, communityId);
         if (heart.isPresent()) {
             // update
             Heart updateHeart = heart.get();
-            updateHeart.updateHeart(heartStatus);
+            updateHeart.updateHeart();
             return heartMapper.mapToHeartRes(updateHeart);
 
         } else{
             // new
             Community community = communityQueryService.getCommunityById(communityId);
-            Heart save = heartSaveService.save(heartMapper.mapToHeart(pusherId, community, heartStatus));
+            Heart save = heartSaveService.save(heartMapper.mapToHeart(pusherId, community));
             community.updateHearts(save);
             return heartMapper.mapToHeartRes(save);
         }

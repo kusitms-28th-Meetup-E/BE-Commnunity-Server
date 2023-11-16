@@ -12,10 +12,8 @@ public class CommunityMapper {
 
     public Community mapToCommunity(String memberId, ContentsDto contentsDto, CommunityReq communityReq){
         return Community.builder()
-                .title(communityReq.getTitle())
-                .talk(communityReq.getTalk())
+                .talk(communityReq.getCommunityText())
                 .contentsId(contentsDto.getContentsId())
-                .contents(contentsDto.getContents())
                 .writerId(memberId)
                 .keyword(contentsDto.getKeyword())
                 .issue(contentsDto.getIssue())
@@ -26,16 +24,15 @@ public class CommunityMapper {
     public CommunityRes mapToCommunityRes(Community community, MemberDto memberDto, ContentsDto contentsDto) {
         return CommunityRes.builder()
                 .id(community.getId())
-                .title(community.getTitle())
-                .talk(community.getTalk())
+                .communityText(community.getTalk())
                 .date(community.getCreatedAt().toString())
                 .writerId(memberDto.getMemberId())
                 .nickname(memberDto.getNickname())
                 .profileImg(memberDto.getProfileImage())
-
+                .contents(contentsDto.getContents())
                 .keyword(contentsDto.getKeyword())
-                .issue(contentsDto.getIssue())
-                .topic(contentsDto.getTopic())
+                .subject(contentsDto.getIssue())
+                .area(contentsDto.getTopic())
                 .build();
     }
 

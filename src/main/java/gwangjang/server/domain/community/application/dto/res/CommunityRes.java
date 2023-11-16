@@ -12,33 +12,38 @@ import java.time.LocalDateTime;
 public class CommunityRes {
 
     private Long id;
-    private String title;
-    private String talk;
+    private String communityText;
     private String date;
 
     private String writerId;
     private String nickname;
     private String profileImg;
 
-    private String topic;
-    private String issue;
+    private String area;
+    private String subject;
     private String keyword;
 
-    private Long heartsNum;
-    private Long commentsNum;
+    private Long likeCount;
+    private Long commentCount;
 
-    public CommunityRes(Long id, String title, String talk, LocalDateTime date, String writerId,
-                        String topic, String issue, String keyword, Long heartsNum, Long commentsNum) {
+    private Long contentsId;
+    private String contents;
+
+    private String likeStatus;
+
+    public CommunityRes(Long id, String talk, LocalDateTime date, String writerId,
+                        String topic, String issue, String keyword, Long heartsNum, Long commentsNum,Long contentsId, String likeStatus) {
         this.id = id;
-        this.title = title;
-        this.talk = talk;
+        this.communityText = talk;
         this.date = date.toString();
         this.writerId = writerId;
-        this.topic = topic;
-        this.issue = issue;
+        this.area = topic;
+        this.subject = issue;
         this.keyword = keyword;
-        this.heartsNum = heartsNum;
-        this.commentsNum = commentsNum;
+        this.likeCount = heartsNum;
+        this.commentCount = commentsNum;
+        this.contentsId = contentsId;
+        this.likeStatus = likeStatus;
     }
 
     public CommunityRes(String nickname, String profileImg) {
@@ -49,5 +54,12 @@ public class CommunityRes {
     public void updateMemberDto(MemberDto memberDto) {
         this.nickname = memberDto.getNickname();
         this.profileImg = memberDto.getProfileImage();
+    }
+
+    public void updateContentsDto(ContentsDto contentsDto) {
+        this.area = contentsDto.getTopic();
+        this.subject = contentsDto.getIssue();
+        this.keyword = contentsDto.getKeyword();
+        this.contents = contentsDto.getContents();
     }
 }
