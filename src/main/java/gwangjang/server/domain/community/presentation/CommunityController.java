@@ -67,7 +67,7 @@ public class CommunityController {
     /**
      * 커뮤니티 글 top5(영역/주제/키워드)
      * @param sortBy 정렬 조건
-     * @param word 정렬 단어
+     * @param wordId 정렬 단어
      * @return
      */
     @GetMapping("/sortBy/{sortBy}/word/{wordId}")
