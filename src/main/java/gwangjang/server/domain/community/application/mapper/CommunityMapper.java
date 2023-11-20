@@ -13,11 +13,11 @@ public class CommunityMapper {
     public Community mapToCommunity(String memberId, ContentsDto contentsDto, CommunityReq communityReq){
         return Community.builder()
                 .talk(communityReq.getCommunityText())
-                .contentsId(contentsDto.getContentsId())
+                .contentsId(contentsDto.getContents_id())
                 .writerId(memberId)
                 .keyword(contentsDto.getKeyword())
-                .issue(contentsDto.getIssue())
-                .topic(contentsDto.getTopic())
+                .issue(contentsDto.getIssueTitle())
+                .topic(contentsDto.getTopicTitle())
                 .build();
     }
 
@@ -29,10 +29,10 @@ public class CommunityMapper {
                 .writerId(memberDto.getMemberId())
                 .nickname(memberDto.getNickname())
                 .profileImg(memberDto.getProfileImage())
-                .contents(contentsDto.getContents())
+                .contents(contentsDto.getUrl())
                 .keyword(contentsDto.getKeyword())
-                .subject(contentsDto.getIssue())
-                .area(contentsDto.getTopic())
+                .subject(contentsDto.getIssueTitle())
+                .area(contentsDto.getTopicTitle())
                 .build();
     }
 

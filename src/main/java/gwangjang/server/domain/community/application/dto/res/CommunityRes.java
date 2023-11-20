@@ -28,6 +28,7 @@ public class CommunityRes {
 
     private Long contentsId;
     private String contents;
+    private String contentsTitle;
 
     private String likeStatus;
 
@@ -57,9 +58,10 @@ public class CommunityRes {
     }
 
     public void updateContentsDto(ContentsDto contentsDto) {
-        this.area = contentsDto.getTopic();
-        this.subject = contentsDto.getIssue();
+        this.area = contentsDto.getTopicTitle();
+        this.subject = contentsDto.getIssueTitle();
         this.keyword = contentsDto.getKeyword();
-        this.contents = contentsDto.getContents();
+        this.contents = contentsDto.getUrl();
+        this.contentsTitle = contentsDto.getTitle();
     }
 }
