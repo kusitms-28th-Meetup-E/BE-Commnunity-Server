@@ -42,4 +42,9 @@ public class CommunityReadUseCase {
 
         return communityQueryService.getCommunityTop5(memberId,CommunityOrderCondition.valueOf(orderBy), word);
     }
+
+
+    public List<CommunityRes> getCommunityByMyHearts(String memberId) {
+        return communityQueryService.getCommunityByMyHearts(memberId);
+    }
 }

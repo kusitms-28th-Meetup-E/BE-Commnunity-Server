@@ -76,6 +76,13 @@ public class CommunityController {
     }
 
 
+    @GetMapping("/mypage")
+    public ResponseEntity<SuccessResponse<List<CommunityRes>>> getMyHeartCommunity(@RequestHeader(value = "user-id") String socialId) {
+        return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityByMyHearts(socialId)));
+    }
+
+
+
 }
 
 

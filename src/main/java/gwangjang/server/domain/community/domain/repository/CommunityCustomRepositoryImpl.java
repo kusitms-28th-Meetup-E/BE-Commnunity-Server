@@ -3,6 +3,7 @@ package gwangjang.server.domain.community.domain.repository;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.JPAExpressions;
+import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import gwangjang.server.domain.community.application.dto.res.CommunityRes;
 import gwangjang.server.domain.community.domain.entity.Community;
@@ -166,6 +167,46 @@ public class CommunityCustomRepositoryImpl implements CommunityCustomRepository 
 
     }
 
+    @Override
+    public Optional<List<CommunityRes>> findCommunityByMyHearts(String memberId) {
+        BooleanExpression memberHeartExists = JPAExpressions
+                .selectOne()
+                .from(heart)
+                .where(
+                        heart.community.id.eq(community.id),
+                        heart.pusherId.eq(memberId),
+                        heart.status.eq(Boolean.TRUE))
+                .exists();
+
+        JPQLQuery<Community> heartsQuery = JPAExpressions
+                .select(heart.community)
+                .from(heart)
+                .where(
+                        heart.pusherId.eq(memberId),
+                        heart.status.eq(Boolean.TRUE));
+
+        return Optional.ofNullable(queryFactory.select(
+                Projections.constructor(CommunityRes.class,
+                        community.id,
+                        community.talk,
+                        community.createdAt,
+                        community.writerId,
+                        community.topic,
+                        community.issue,
+                        community.keyword,
+                        community.hearts.size().longValue(),
+                        community.comments.size().longValue(),
+                        community.contentsId,
+                        memberHeartExists.stringValue()
+                        ))
+                        .from(community)
+                        .where(community.in(heartsQuery))
+
+//                        .orderBy(community.hearts.size().desc()) // hearts의 크기에 따라 내림차순 정렬
+                        .fetch());
+
+    }
+
 
     private BooleanExpression orderByColumn(CommunityOrderCondition orderCondition, String word) {
         if (orderCondition.equals(CommunityOrderCondition.KEYWORD)) {
@@ -178,6 +219,9 @@ public class CommunityCustomRepositoryImpl implements CommunityCustomRepository 
             return community.topic.eq(word);
         }
     }
+
+
+
 
 
 }
