@@ -7,12 +7,14 @@ import gwangjang.server.domain.community.domain.entity.Community;
 import gwangjang.server.domain.community.domain.entity.constant.CommunityOrderCondition;
 import gwangjang.server.domain.community.domain.repository.CommunityRepository;
 import gwangjang.server.domain.community.exception.NotFoundCommunityException;
+import gwangjang.server.global.annotation.DomainService;
 import gwangjang.server.global.feign.client.FindMemberFeignClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+//@DomainService
 @Service
 @RequiredArgsConstructor
 public class CommunityQueryService {
@@ -76,5 +78,9 @@ public class CommunityQueryService {
         );
 
         return communityRes;
+    }
+
+    public List<CommunityRes> getCommunityByMyHearts(String memberId) {
+        return communityRepository.findCommunityByMyHearts(memberId).orElseThrow(NotFoundCommunityException::new);
     }
 }

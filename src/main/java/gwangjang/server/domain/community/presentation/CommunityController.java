@@ -46,12 +46,12 @@ public class CommunityController {
 
     /**
      * 커뮤니티 글 리스트업(영역별)
-     * @param topicId 영역 정보
+     * @param topic 영역 정보
      * @return
      */
-    @GetMapping("/topic/{topicId}")
-    public ResponseEntity<SuccessResponse<List<CommunityRes>>> getCommunityListByDomain(@RequestHeader(value = "user-id") String socialId,@PathVariable("topicId") Long topicId) {
-        return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityList(socialId,topicId)));
+    @GetMapping("/topic/{topic}")
+    public ResponseEntity<SuccessResponse<List<CommunityRes>>> getCommunityListByDomain(@RequestHeader(value = "user-id") String socialId,@PathVariable("topic") String topic) {
+        return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityList(socialId,topic)));
     }
 
     /**
@@ -67,13 +67,20 @@ public class CommunityController {
     /**
      * 커뮤니티 글 top5(영역/주제/키워드)
      * @param sortBy 정렬 조건
-     * @param wordId 정렬 단어
+     * @param word 정렬 단어
      * @return
      */
-    @GetMapping("/sortBy/{sortBy}/word/{wordId}")
-    public ResponseEntity<SuccessResponse<List<CommunityRes>>> getCommunityTop5(@RequestHeader(value = "user-id") String socialId, @PathVariable("sortBy") String sortBy,@PathVariable("wordId") Long wordId ) {
-        return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityTop5ByHearts(socialId,sortBy,wordId)));
+    @GetMapping("/sortBy/{sortBy}/word/{word}")
+    public ResponseEntity<SuccessResponse<List<CommunityRes>>> getCommunityTop5(@RequestHeader(value = "user-id") String socialId, @PathVariable("sortBy") String sortBy,@PathVariable("word") String word ) {
+        return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityTop5ByHearts(socialId,sortBy,word)));
     }
+
+
+    @GetMapping("/mypage")
+    public ResponseEntity<SuccessResponse<List<CommunityRes>>> getMyHeartCommunity(@RequestHeader(value = "user-id") String socialId) {
+        return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityByMyHearts(socialId)));
+    }
+
 
 
 }

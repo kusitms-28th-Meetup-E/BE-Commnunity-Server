@@ -32,8 +32,8 @@ public class CommunityCreateUseCase {
     public CommunityRes create(String socialId, Long contentsId, CommunityReq communityReq) {
 
         MemberDto memberDto = findMemberFeignClient.getMemberBySocialId(socialId);
-//        ContentsDto contentsDto = findContentsFeignClient.getContents(contentsId);'
-        ContentsDto contentsDto = new ContentsDto(contentsId, "hihih","환경","후쿠시마 오염수","방류");
+        ContentsDto contentsDto = findContentsFeignClient.getContents(contentsId).getBody().getData();
+//        ContentsDto contentsDto = new ContentsDto(contentsId, "hihih","환경","후쿠시마 오염수","방류");
 
         Community community = communitySaveService.save(
                 communityMapper.mapToCommunity(memberDto.getMemberId(), contentsDto, communityReq));

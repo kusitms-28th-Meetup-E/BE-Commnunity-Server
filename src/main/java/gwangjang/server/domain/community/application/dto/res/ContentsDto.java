@@ -4,16 +4,30 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class ContentsDto {
 
-    private Long contentsId;
-    private String contents;
+//    private Long contents_Id;
+//    private String contents;
+//
+//    private String keyword;
+//    private String issue;
+//    private String topic;
 
+    private Long contents_id;
+    private String url;
+    private String title;
+    private String description;
+    private String type;
+    private String issueTitle;
     private String keyword;
-    private String issue;
-    private String topic;
+    private String pubDate;
+    private String topicTitle;
+    private String imgUrl;
+
 
 }
