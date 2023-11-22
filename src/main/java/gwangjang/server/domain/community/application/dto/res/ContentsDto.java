@@ -26,7 +26,7 @@ public class ContentsDto {
     private String issueTitle;
     private String keyword;
     private String pubDate;
-    private String topicTitle;
+    private String topic;
     private String imgUrl;
 
 
