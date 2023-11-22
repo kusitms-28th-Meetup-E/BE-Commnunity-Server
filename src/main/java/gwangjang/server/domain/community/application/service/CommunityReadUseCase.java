@@ -39,4 +39,8 @@ public class CommunityReadUseCase {
 
         return communityQueryService.getCommunityByMyHearts(memberId);
     }
+
+    public List<CommunityRes> getCommunityByMyId(String memberId) {
+        return communityQueryService.getCommunityByMyId(memberId);
+    }
 }

@@ -220,6 +220,39 @@ public class CommunityCustomRepositoryImpl implements CommunityCustomRepository 
         }
     }
 
+    public Optional<List<CommunityRes>> findCommunityByMyId(String memberId) {
+
+        BooleanExpression memberHeartExists = JPAExpressions
+                .selectOne()
+                .from(heart)
+                .where(
+                        heart.community.id.eq(community.id),
+                        heart.pusherId.eq(memberId),
+                        heart.status.eq(Boolean.TRUE))
+                .exists();
+
+        return Optional.ofNullable(queryFactory.select(
+                        Projections.constructor(CommunityRes.class,
+                                community.id,
+                                community.talk,
+                                community.createdAt,
+                                community.writerId,
+                                community.topic,
+                                community.issue,
+                                community.keyword,
+                                community.hearts.size().longValue(),
+                                community.comments.size().longValue(),
+                                community.contentsId,
+                                memberHeartExists.stringValue()
+                        ))
+                .from(community)
+                .where(community.writerId.eq(memberId))
+                .fetch());
+
+    }
+
+
+
 
 
 

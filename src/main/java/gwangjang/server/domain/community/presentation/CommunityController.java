@@ -81,6 +81,13 @@ public class CommunityController {
         return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityByMyHearts(socialId)));
     }
 
+    @GetMapping("/mywrite")
+    public ResponseEntity<SuccessResponse<List<CommunityRes>>> getMyCommunity(@RequestHeader(value = "user-id") String socialId) {
+        return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityByMyId(socialId)));
+    }
+
+
+
 
 
 }

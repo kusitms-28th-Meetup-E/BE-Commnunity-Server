@@ -83,4 +83,9 @@ public class CommunityQueryService {
     public List<CommunityRes> getCommunityByMyHearts(String memberId) {
         return communityRepository.findCommunityByMyHearts(memberId).orElseThrow(NotFoundCommunityException::new);
     }
+
+    public List<CommunityRes> getCommunityByMyId(String memberId) {
+        return communityRepository.findCommunityByMyId(memberId).orElseThrow(NotFoundCommunityException::new);
+    }
+
 }
