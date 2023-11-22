@@ -58,7 +58,7 @@ public class CommunityRes {
     }
 
     public void updateContentsDto(ContentsDto contentsDto) {
-        this.area = contentsDto.getTopicTitle();
+        this.area = contentsDto.getTopic();
         this.subject = contentsDto.getIssueTitle();
         this.keyword = contentsDto.getKeyword();
         this.contents = contentsDto.getUrl();
