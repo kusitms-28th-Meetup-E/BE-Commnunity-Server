@@ -91,7 +91,14 @@ public class CommunityQueryService {
     }
     public SearchRes search(String memberId, CommunityOrderCondition communityOrderCondition, String keyword) {
         List<CommunityRes> searchResults = communityRepository.getSearchCommunity(memberId,communityOrderCondition,keyword).orElseThrow(NotFoundCommunityException::new);;
-
+        searchResults.stream().forEach(
+                communityRes1 ->
+                {
+                    String writerId = communityRes1.getWriterId();
+                    MemberDto memberDto = findMemberFeignClient.getMemberBySocialId(writerId);
+                    communityRes1.updateMemberDto(memberDto);
+                }
+        );
 
         SearchRes searchRes = new SearchRes();
         searchRes.setSearchKeyword(keyword);
