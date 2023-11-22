@@ -11,5 +11,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface FindContentsFeignClient {
 
     @GetMapping("/{contentsId}")
-    ResponseEntity<ContentsDto> getContents(@PathVariable("contentsId") Long contentsId);
+    ResponseEntity<SuccessResponse<ContentsDto>> getContents(@PathVariable("contentsId") Long contentsId);
 }

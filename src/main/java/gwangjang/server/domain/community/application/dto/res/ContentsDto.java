@@ -27,7 +27,7 @@ public class ContentsDto {
     private String keyword;
     private String pubDate;
     private String topicTitle;
-    private List<String> like;
+    private String imgUrl;
 
 
 }
