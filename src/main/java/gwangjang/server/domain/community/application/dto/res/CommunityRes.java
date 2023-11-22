@@ -29,6 +29,7 @@ public class CommunityRes {
     private Long contentsId;
     private String contents;
     private String contentsTitle;
+    private String contentsUrl;
 
     private String likeStatus;
 
@@ -63,5 +64,6 @@ public class CommunityRes {
         this.keyword = contentsDto.getKeyword();
         this.contents = contentsDto.getUrl();
         this.contentsTitle = contentsDto.getTitle();
+        this.contentsUrl = contentsDto.getImgUrl();
     }
 }
