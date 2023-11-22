@@ -2,8 +2,10 @@ package gwangjang.server.domain.community.presentation;
 
 import gwangjang.server.domain.community.application.dto.req.CommunityReq;
 import gwangjang.server.domain.community.application.dto.res.CommunityRes;
+import gwangjang.server.domain.community.application.dto.res.SearchRes;
 import gwangjang.server.domain.community.application.service.CommunityCreateUseCase;
 import gwangjang.server.domain.community.application.service.CommunityReadUseCase;
+import gwangjang.server.domain.community.domain.entity.constant.CommunityOrderCondition;
 import gwangjang.server.domain.community.presentation.constant.CommunityResponseMessage;
 import gwangjang.server.global.response.SuccessResponse;
 import lombok.AllArgsConstructor;
@@ -75,7 +77,6 @@ public class CommunityController {
         return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityTop5ByHearts(socialId,sortBy,word)));
     }
 
-
     @GetMapping("/mypage")
     public ResponseEntity<SuccessResponse<List<CommunityRes>>> getMyHeartCommunity(@RequestHeader(value = "user-id") String socialId) {
         return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityByMyHearts(socialId)));
@@ -87,8 +88,10 @@ public class CommunityController {
     }
 
 
-
-
+    @GetMapping("/search/{sortBy}/{keyword}")
+    public ResponseEntity<SuccessResponse<SearchRes>> search(@RequestHeader(value = "user-id") String socialId, @PathVariable("sortBy") String sortBy, @PathVariable String keyword) {
+        return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(),this.communityReadUseCase.getSearchList(socialId ,sortBy,keyword)));
+    }
 
 }
 

@@ -2,6 +2,7 @@ package gwangjang.server.domain.community.application.service;
 
 
 import gwangjang.server.domain.community.application.dto.res.CommunityRes;
+import gwangjang.server.domain.community.application.dto.res.SearchRes;
 import gwangjang.server.domain.community.domain.entity.constant.CommunityOrderCondition;
 import gwangjang.server.domain.community.domain.service.CommunityQueryService;
 import gwangjang.server.global.annotation.DomainService;
@@ -34,7 +35,6 @@ public class CommunityReadUseCase {
         return communityQueryService.getCommunityTop5(memberId,CommunityOrderCondition.valueOf(orderBy), word);
     }
 
-
     public List<CommunityRes> getCommunityByMyHearts(String memberId) {
 
         return communityQueryService.getCommunityByMyHearts(memberId);
@@ -42,5 +42,10 @@ public class CommunityReadUseCase {
 
     public List<CommunityRes> getCommunityByMyId(String memberId) {
         return communityQueryService.getCommunityByMyId(memberId);
+    }
+
+    public SearchRes getSearchList(String memberId,String orderBy,String keyword){
+        return communityQueryService.search(memberId,CommunityOrderCondition.valueOf(orderBy),keyword);
+
     }
 }
