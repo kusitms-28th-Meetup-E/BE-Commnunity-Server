@@ -33,7 +33,7 @@
         run: chmod +x gradlew
   
       - name: Build with Gradle
-        run: ./gradlew build -x test
+        run: ./gradlew clean build -x test
   
       - name: Docker build
         run: |
