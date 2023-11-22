@@ -17,7 +17,7 @@ public class CommunityMapper {
                 .writerId(memberId)
                 .keyword(contentsDto.getKeyword())
                 .issue(contentsDto.getIssueTitle())
-                .topic(contentsDto.getTopicTitle())
+                .topic(contentsDto.getTopic())
                 .build();
     }
 
@@ -32,7 +32,7 @@ public class CommunityMapper {
                 .contents(contentsDto.getUrl())
                 .keyword(contentsDto.getKeyword())
                 .subject(contentsDto.getIssueTitle())
-                .area(contentsDto.getTopicTitle())
+                .area(contentsDto.getTopic())
                 .build();
     }
 
