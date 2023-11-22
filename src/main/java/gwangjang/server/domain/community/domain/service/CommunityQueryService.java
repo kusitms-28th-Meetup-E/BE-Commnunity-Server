@@ -87,8 +87,34 @@ public class CommunityQueryService {
     }
 
     public List<CommunityRes> getCommunityByMyHearts(String memberId) {
-        return communityRepository.findCommunityByMyHearts(memberId).orElseThrow(NotFoundCommunityException::new);
+        List<CommunityRes> communityRes = communityRepository.findCommunityByMyHearts(memberId).orElseThrow(NotFoundCommunityException::new);
+
+        communityRes.stream().forEach(
+                communityRes1 ->
+                {
+                    String writerId = communityRes1.getWriterId();
+                    MemberDto memberDto = findMemberFeignClient.getMemberBySocialId(writerId);
+                    communityRes1.updateMemberDto(memberDto);
+                }
+        );
+
+        return communityRes;
     }
+
+    public List<CommunityRes> getCommunityByMyId(String memberId) {
+        List<CommunityRes> communityRes = communityRepository.findCommunityByMyId(memberId).orElseThrow(NotFoundCommunityException::new);
+
+        communityRes.stream().forEach(
+                communityRes1 ->
+                {
+                    String writerId = communityRes1.getWriterId();
+                    MemberDto memberDto = findMemberFeignClient.getMemberBySocialId(writerId);
+                    communityRes1.updateMemberDto(memberDto);
+                }
+        );
+        return communityRes;
+    }
+
     public SearchRes search(String memberId, CommunityOrderCondition communityOrderCondition, String keyword) {
         List<CommunityRes> searchResults = communityRepository.getSearchCommunity(memberId,communityOrderCondition,keyword).orElseThrow(NotFoundCommunityException::new);;
 

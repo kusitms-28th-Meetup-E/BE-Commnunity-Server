@@ -39,6 +39,11 @@ public class CommunityReadUseCase {
 
         return communityQueryService.getCommunityByMyHearts(memberId);
     }
+
+    public List<CommunityRes> getCommunityByMyId(String memberId) {
+        return communityQueryService.getCommunityByMyId(memberId);
+    }
+
     public SearchRes getSearchList(String memberId,String orderBy,String keyword){
         return communityQueryService.search(memberId,CommunityOrderCondition.valueOf(orderBy),keyword);
 

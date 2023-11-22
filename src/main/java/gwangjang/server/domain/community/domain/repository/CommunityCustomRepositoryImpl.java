@@ -222,7 +222,8 @@ public class CommunityCustomRepositoryImpl implements CommunityCustomRepository 
         }
     }
 
-    public Optional<List<CommunityRes>> getSearchCommunity(String memberId,CommunityOrderCondition orderCondition, String keyword) {
+    public Optional<List<CommunityRes>> findCommunityByMyId(String memberId) {
+
         BooleanExpression memberHeartExists = JPAExpressions
                 .selectOne()
                 .from(heart)
@@ -232,32 +233,58 @@ public class CommunityCustomRepositoryImpl implements CommunityCustomRepository 
                         heart.status.eq(Boolean.TRUE))
                 .exists();
 
-        return Optional.ofNullable(queryFactory
-                .select(Projections.constructor(CommunityRes.class,
-                        community.id,
-                        community.talk,
-                        community.createdAt,
-                        community.writerId,
-                        community.topic,
-                        community.issue,
-                        community.keyword,
-                        community.hearts.size().longValue(),
-                        community.comments.size().longValue(),
-                        community.contentsId,
-                        memberHeartExists.stringValue()
-                ))
+        return Optional.ofNullable(queryFactory.select(
+                        Projections.constructor(CommunityRes.class,
+                                community.id,
+                                community.talk,
+                                community.createdAt,
+                                community.writerId,
+                                community.topic,
+                                community.issue,
+                                community.keyword,
+                                community.hearts.size().longValue(),
+                                community.comments.size().longValue(),
+                                community.contentsId,
+                                memberHeartExists.stringValue()
+                        ))
                 .from(community)
-                .where(
-                        orderByColumn(orderCondition,keyword)
-
-                ).orderBy(community.hearts.size().desc()) // hearts의 크기에 따라 내림차순 정렬
+                .where(community.writerId.eq(memberId))
                 .fetch());
-
     }
 
+    public Optional<List<CommunityRes>> getSearchCommunity (String memberId, CommunityOrderCondition orderCondition, String keyword){
 
+            BooleanExpression memberHeartExists = JPAExpressions
+                    .selectOne()
+                    .from(heart)
+                    .where(
+                            heart.community.id.eq(community.id),
+                            heart.pusherId.eq(memberId),
+                            heart.status.eq(Boolean.TRUE))
+                    .exists();
 
+            return Optional.ofNullable(queryFactory
+                    .select(Projections.constructor(CommunityRes.class,
+                            community.id,
+                            community.talk,
+                            community.createdAt,
+                            community.writerId,
+                            community.topic,
+                            community.issue,
+                            community.keyword,
+                            community.hearts.size().longValue(),
+                            community.comments.size().longValue(),
+                            community.contentsId,
+                            memberHeartExists.stringValue()
+                    ))
+                    .from(community)
+                    .where(
+                            orderByColumn(orderCondition, keyword)
 
+                    ).orderBy(community.hearts.size().desc()) // hearts의 크기에 따라 내림차순 정렬
+                    .fetch());
+
+        }
 
 
 

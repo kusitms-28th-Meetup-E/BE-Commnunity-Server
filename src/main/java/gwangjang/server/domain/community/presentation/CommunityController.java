@@ -82,6 +82,12 @@ public class CommunityController {
         return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityByMyHearts(socialId)));
     }
 
+    @GetMapping("/mywrite")
+    public ResponseEntity<SuccessResponse<List<CommunityRes>>> getMyCommunity(@RequestHeader(value = "user-id") String socialId) {
+        return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(), this.communityReadUseCase.getCommunityByMyId(socialId)));
+    }
+
+
     @GetMapping("/search/{sortBy}/{keyword}")
     public ResponseEntity<SuccessResponse<SearchRes>> search(@RequestHeader(value = "user-id") String socialId, @PathVariable("sortBy") String sortBy, @PathVariable String keyword) {
         return ResponseEntity.ok(SuccessResponse.create(CommunityResponseMessage.GET_COMMUNITY_SUCCESS.getMessage(),this.communityReadUseCase.getSearchList(socialId ,sortBy,keyword)));

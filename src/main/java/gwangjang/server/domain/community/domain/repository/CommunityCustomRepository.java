@@ -19,4 +19,5 @@ public interface CommunityCustomRepository {
     Optional<List<CommunityRes>> getSearchCommunity(String memberId,CommunityOrderCondition orderCondition, String keyword);
 
     Optional<List<CommunityRes>> findCommunityByMyHearts(String memberId);
+    Optional<List<CommunityRes>> findCommunityByMyId(String memberId);
 }
