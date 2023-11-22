@@ -16,6 +16,7 @@ public interface CommunityCustomRepository {
     Optional<List<CommunityRes>> findCommunityTop5ByHeartsAndTopic(String memberId,String topic);
 
     Optional<List<CommunityRes>> findCommunityTop5(String memberId,CommunityOrderCondition orderCondition, String word);
+    Optional<List<CommunityRes>> getSearchCommunity(String memberId,CommunityOrderCondition orderCondition, String keyword);
 
     Optional<List<CommunityRes>> findCommunityByMyHearts(String memberId);
 }

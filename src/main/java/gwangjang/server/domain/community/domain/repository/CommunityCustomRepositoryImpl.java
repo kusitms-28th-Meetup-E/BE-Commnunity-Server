@@ -2,11 +2,13 @@ package gwangjang.server.domain.community.domain.repository;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.StringPath;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import gwangjang.server.domain.community.application.dto.res.CommunityRes;
 import gwangjang.server.domain.community.domain.entity.Community;
+import gwangjang.server.domain.community.domain.entity.QCommunity;
 import gwangjang.server.domain.community.domain.entity.constant.CommunityOrderCondition;
 import jakarta.persistence.EntityManager;
 
@@ -219,6 +221,41 @@ public class CommunityCustomRepositoryImpl implements CommunityCustomRepository 
             return community.topic.eq(word);
         }
     }
+
+    public Optional<List<CommunityRes>> getSearchCommunity(String memberId,CommunityOrderCondition orderCondition, String keyword) {
+        BooleanExpression memberHeartExists = JPAExpressions
+                .selectOne()
+                .from(heart)
+                .where(
+                        heart.community.id.eq(community.id),
+                        heart.pusherId.eq(memberId),
+                        heart.status.eq(Boolean.TRUE))
+                .exists();
+
+        return Optional.ofNullable(queryFactory
+                .select(Projections.constructor(CommunityRes.class,
+                        community.id,
+                        community.talk,
+                        community.createdAt,
+                        community.writerId,
+                        community.topic,
+                        community.issue,
+                        community.keyword,
+                        community.hearts.size().longValue(),
+                        community.comments.size().longValue(),
+                        community.contentsId,
+                        memberHeartExists.stringValue()
+                ))
+                .from(community)
+                .where(
+                        orderByColumn(orderCondition,keyword)
+
+                ).orderBy(community.hearts.size().desc()) // hearts의 크기에 따라 내림차순 정렬
+                .fetch());
+
+    }
+
+
 
 
 
