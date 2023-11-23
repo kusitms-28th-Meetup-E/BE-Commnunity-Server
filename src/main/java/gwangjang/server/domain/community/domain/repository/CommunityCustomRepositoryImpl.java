@@ -217,6 +217,9 @@ public class CommunityCustomRepositoryImpl implements CommunityCustomRepository 
             return community.issue.eq(word);
         } else if (orderCondition.equals(CommunityOrderCondition.ALL)) {
             return null;
+        } else if (orderCondition.equals(CommunityOrderCondition.SEARCH)) {
+            return community.topic.like("%"+word+"%").or(community.issue.like("%"+word+"%")
+                    .or(community.keyword.like("%"+word+"%").or(community.talk.like("%"+word+"%"))));
         } else{
             return community.topic.eq(word);
         }

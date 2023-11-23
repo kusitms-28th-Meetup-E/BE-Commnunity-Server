@@ -6,6 +6,6 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum CommunityOrderCondition {
-    TOPIC("topic"),ISSUE("issue"), KEYWORD("keyword"),ALL("all");
+    TOPIC("topic"),ISSUE("issue"), KEYWORD("keyword"),ALL("all"),SEARCH("search");
     private final String name;
 }

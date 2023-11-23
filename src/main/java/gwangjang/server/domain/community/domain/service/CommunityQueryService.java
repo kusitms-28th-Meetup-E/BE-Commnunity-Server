@@ -57,9 +57,11 @@ public class CommunityQueryService {
         communityRes.stream().forEach(
                 communityRes1 ->
                 {
+                    
                     String writerId = communityRes1.getWriterId();
                     MemberDto memberDto = findMemberFeignClient.getMemberBySocialId(writerId);
                     communityRes1.updateMemberDto(memberDto);
+
 
                     Long contentsId = communityRes1.getContentsId();
                     ContentsDto contentsDto = findContentsFeignClient.getContents(contentsId).getBody().getData();
