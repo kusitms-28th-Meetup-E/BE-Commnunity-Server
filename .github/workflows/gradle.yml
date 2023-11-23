@@ -62,4 +62,4 @@
             docker pull ${{ secrets.DOCKER_USERNAME }}/community:latest
             docker image prune -a -f
             docker stop ec2-user-community-1
-            docker-compose up -d
+            docker-compose-community up -d
