@@ -31,10 +31,10 @@ public class CommunityRes {
     private String contentsTitle;
     private String contentsUrl;
 
-    private String likeStatus;
+    private Boolean likeStatus;
 
     public CommunityRes(Long id, String talk, LocalDateTime date, String writerId,
-                        String topic, String issue, String keyword, Long heartsNum, Long commentsNum,Long contentsId, String likeStatus) {
+                        String topic, String issue, String keyword, Long heartsNum, Long commentsNum,Long contentsId, Boolean likeStatus) {
         this.id = id;
         this.communityText = talk;
         this.date = date.toString();

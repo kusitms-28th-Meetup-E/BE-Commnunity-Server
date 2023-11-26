@@ -52,7 +52,7 @@ public class CommunityCustomRepositoryImpl implements CommunityCustomRepository 
                                 community.hearts.size().longValue(),
                                 community.comments.size().longValue(),
                                 community.contentsId,
-                                memberHeartExists.stringValue()
+                                memberHeartExists
 
                         ))
                         .from(community)
@@ -86,7 +86,7 @@ public class CommunityCustomRepositoryImpl implements CommunityCustomRepository 
                                 community.hearts.size().longValue(),
                                 community.comments.size().longValue(),
                                 community.contentsId,
-                                memberHeartExists.stringValue()
+                                memberHeartExists
                         ))
                         .from(community)
                         .orderBy(community.createdAt.desc())
@@ -118,7 +118,7 @@ public class CommunityCustomRepositoryImpl implements CommunityCustomRepository 
                                 community.hearts.size().longValue(),
                                 community.comments.size().longValue(),
                                 community.contentsId,
-                                memberHeartExists.stringValue()
+                                memberHeartExists
                         ))
                         .from(community)
                         .where(community.id.eq(communityId))
@@ -156,7 +156,7 @@ public class CommunityCustomRepositoryImpl implements CommunityCustomRepository 
                         community.hearts.size().longValue(),
                         community.comments.size().longValue(),
                         community.contentsId,
-                        memberHeartExists.stringValue()
+                        memberHeartExists
                 ))
                 .from(community)
                 .where(
@@ -199,7 +199,7 @@ public class CommunityCustomRepositoryImpl implements CommunityCustomRepository 
                         community.hearts.size().longValue(),
                         community.comments.size().longValue(),
                         community.contentsId,
-                        memberHeartExists.stringValue()
+                        memberHeartExists
                         ))
                         .from(community)
                         .where(community.in(heartsQuery))
@@ -248,7 +248,7 @@ public class CommunityCustomRepositoryImpl implements CommunityCustomRepository 
                                 community.hearts.size().longValue(),
                                 community.comments.size().longValue(),
                                 community.contentsId,
-                                memberHeartExists.stringValue()
+                                memberHeartExists
                         ))
                 .from(community)
                 .where(community.writerId.eq(memberId))
@@ -278,7 +278,7 @@ public class CommunityCustomRepositoryImpl implements CommunityCustomRepository 
                             community.hearts.size().longValue(),
                             community.comments.size().longValue(),
                             community.contentsId,
-                            memberHeartExists.stringValue()
+                            memberHeartExists
                     ))
                     .from(community)
                     .where(
