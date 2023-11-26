@@ -29,5 +29,9 @@ public class ContentsDto {
     private String topic;
     private String imgUrl;
 
+    private Long likeCount;
+
+    private String heartStatus;
+
 
 }
