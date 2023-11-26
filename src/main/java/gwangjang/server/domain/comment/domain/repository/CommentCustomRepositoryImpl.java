@@ -29,7 +29,7 @@ public class CommentCustomRepositoryImpl implements CommentCustomRepository {
                 ))
                 .from(comment)
                 .where(comment.community.id.eq(communityId))
-                .orderBy(comment.createAt.desc())
+                .orderBy(comment.createdAt.desc())
                 .fetch();
     }
 
